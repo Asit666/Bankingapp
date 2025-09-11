@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class mains {
     private static String opt2;
+    private static String recipientaccountn;
+    private static boolean vo;
 
     public static void main(String[] args) {
         Scanner A = new Scanner(System.in);
@@ -34,18 +36,19 @@ public class mains {
 
         if (loggedin != null) {
             System.out.println("Login successful");
-            boolean vo = true;
+            vo = true;
 
-            while (vo == true) {
+            while (vo) {
                 System.out.println("1. Check Balance");
                 System.out.println("2. Deposit");
                 System.out.println("3. Withdraw");
-                System.out.println("4. Exit");
+                System.out.println("4. Transfer Money");
+                System.out.println("5. Exit");
                 System.out.print("Choose an option: ");
                 opt2 = A.nextLine().trim();
 
-                if (opt2.equals("1") || opt2.equals("2") || opt2.equals("3") || opt2.equals("4")) {
-                    if (opt2.equals("4")) {
+                if (opt2.equals("1") || opt2.equals("2") || opt2.equals("3") || opt2.equals("4") || opt2.equals("5")) {
+                    if (opt2.equals("5")) {
                         break;
                     } else if (opt2.equals("1")) {
                         System.out.println("Balance: " + loggedin.getbalance());
@@ -69,19 +72,62 @@ public class mains {
                         System.out.println("Total account balance: " + loggedin.getbalance());
                         vo = true;
                         continue;
+                    } else if (opt2.equals("4")) {
+                        recipientaccountn = null;
+                        while (true) {
+                            System.out.print("Enter the recipient's account number: ");
+                            recipientaccountn = A.nextLine().trim();
+                            Bankaccount recipient = null;
+                            for (Bankaccount acc : accounts) {
+                                if (acc.getaccountnumber().equals(recipientaccountn)) {
+                                    recipient = acc;
+                                    break;
+                                }
+                            }
+                            if (recipient == null) {
+                                System.out.println("Account not found, try again");
+                                continue;
+                            }
+                            if (recipientaccountn.equals(loggedin.getaccountnumber())) {
+                                System.out.println("You cannot transfer money to your own account.");
+                                continue;
+                            }
+                            System.out.println("Account found");
+                            System.out.print("Enter the amount to transfer: ");
+                            String amountStr = A.nextLine().trim();
+                            double amount;
+                            try {
+                                amount = Double.parseDouble(amountStr);
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid amount, try again");
+                                continue;
+                            }
+                            if (amount <= 0) {
+                                System.out.println("Invalid amount, try again");
+                                continue;
+                            }
+                            if (loggedin.getbalance() < amount) {
+                                System.out.println("Insufficient balance, try again");
+                                continue;
+                            }
+                            loggedin.withdraw(amount);
+                            recipient.deposit(amount);
+                            System.out.println("Transfer successful, your account balance is: " + loggedin.getbalance());
+                            break;
+                            }
+                        }
+                        } else {
+                            System.out.println("Account not found, try again");
+                            vo = true;
+                            continue;
+                        }
+                        System.out.println("Error, try again");
+                        vo = true;
+                        continue;
                     }
-                } else if (loggedin == null) {
-                    System.out.println("Account not found try again");
-                    vo = true;
-                    continue;
                 } else {
-                    System.out.println("Error ,Try again");
-                    vo = true;
-                    continue;
+                    System.out.println("Invalid account or PIN.");
                 }
-            }
-        } else {
-            System.out.println("Invalid account or PIN.");
-        }System.out.println("heushfuhs");
-    }
-}
+                System.out.println("TS");A.close(); 
+            } 
+        }  
