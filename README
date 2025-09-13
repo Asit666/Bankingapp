@@ -1,7 +1,6 @@
-## Name - TS1BAPP
-
+## Name - Bankingapp
 ## Project Overview
-TS1BAPP is a [short description of what the project does — e.g., "a simple banking application for managing transactions and user accounts"].
+Bankingapp is a [short description of what the project does — e.g., "a simple banking application for managing transactions and user accounts"].
 
 ## Features
 - User registration & login
@@ -21,7 +20,7 @@ TS1BAPP is a [short description of what the project does — e.g., "a simple ban
 ## How to Run
 
 # Clone the repository
-git clone https://github.com/Asit666/TS1BAPP.git
+git clone https://github.com/Asit666/Bankingapp.git
 
 # Navigate to project
-cd TS1BAPP
+cd Bankingapp
