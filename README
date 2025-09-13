@@ -1,0 +1,27 @@
+## Name - TS1BAPP
+
+## Project Overview
+TS1BAPP is a [short description of what the project does — e.g., "a simple banking application for managing transactions and user accounts"].
+
+## Features
+- User registration & login
+- Secure transaction handling
+- Account balance tracking
+- [Other features your project includes]
+
+## Tech Stack
+- Java
+- [Any frameworks/libraries used]
+- [Database if applicable]
+
+## Project Structure
+
+
+
+## How to Run
+
+# Clone the repository
+git clone https://github.com/Asit666/TS1BAPP.git
+
+# Navigate to project
+cd TS1BAPP
